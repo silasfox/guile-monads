@@ -1,5 +1,5 @@
 (hall-description
-  (name "monads")
+  (name "guile-monads")
   (prefix "")
   (version "0.1")
   (author "Silas Vedder")
