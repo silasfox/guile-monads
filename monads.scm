@@ -1,6 +1,13 @@
 (define-module (monads)
   #:use-module (srfi srfi-1)
-  #:use-module (srfi srfi-9))
+  #:use-module (srfi srfi-9)
+  #:export (<monad> monad with-m
+            m-seq bind-seq return-seq
+            m-id
+            bind-cont return-cont m-cont
+            bind-writer return-writer m-writer tell-writer
+            bind-state return-state m-state get-state put-state
+            bind-maybe return-maybe m-maybe))
 
 (define-record-type <monad>
   (monad binder returner plus zero)
