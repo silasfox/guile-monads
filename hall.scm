@@ -6,7 +6,7 @@
   (copyright (2022))
   (synopsis "")
   (description "")
-  (home-page "")
+  (home-page "https://github.com/silasfox/guile-monads")
   (license gpl3+)
   (dependencies `())
   (files (libraries
