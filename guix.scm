@@ -13,14 +13,7 @@
 (package
   (name "monads")
   (version "0.1")
-  (source
-    (origin
-      (method git-fetch)
-      (uri (git-reference
-             (url "https://github.com/silasfox/guile-monads")
-             (commit "*insert git-commit-reference here*")))
-      (file-name "monads-0.1-checkout")
-      (sha256 (base32 "*insert hash here*"))))
+  (source "./monads-0.1.tar.gz")
   (build-system gnu-build-system)
   (arguments `())
   (native-inputs
@@ -35,3 +28,4 @@
   (home-page
     "https://github.com/silasfox/guile-monads")
   (license license:gpl3+))
+
