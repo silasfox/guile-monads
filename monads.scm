@@ -68,6 +68,10 @@
 (define (get-state s) `(,s . ,s))
 (define (put-state new-s) (lambda (s) `(_ . ,new-s)))
 
+(define (init-stack) (put-state '()))
+(define (pop-stack s) s)
+(define (push-stack item) (lambda (s) `(_ . ,(cons item s))))
+
 (define bind-writer (lambda (v f)
                       (let ((mb (f (car v))))
                         `(,(car mb) . ,(append (cdr v) (cdr mb))))))

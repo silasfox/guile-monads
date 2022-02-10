@@ -11,9 +11,9 @@
   (gnu packages texinfo))
 
 (package
-  (name "monads")
+  (name "guile-monads")
   (version "0.1")
-  (source "./monads-0.1.tar.gz")
+  (source "./guile-monads-0.1.tar.gz")
   (build-system gnu-build-system)
   (arguments `())
   (native-inputs
