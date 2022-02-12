@@ -1,7 +1,7 @@
 (hall-description
   (name "guile-monads")
   (prefix "")
-  (version "0.1.1.2")
+  (version "0.1.1.3")
   (author "Silas Vedder")
   (copyright (2022))
   (synopsis "")
