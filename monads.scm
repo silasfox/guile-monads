@@ -8,7 +8,15 @@
             bind-cont return-cont m-cont
             bind-writer return-writer m-writer tell-writer
             bind-state return-state m-state get-state put-state
-            bind-maybe return-maybe m-maybe))
+            bind-maybe return-maybe m-maybe
+            reify
+            reflect-cont
+            reflect-id
+            reflect-maybe
+            reflect-seq
+            reflect-state
+            reflect-writer
+            make-reflector))
 
 (define-record-type <monad>
   (monad binder returner plus zero)

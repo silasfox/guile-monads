@@ -8,10 +8,9 @@ guile-monads is a monads library for guile scheme.
 ** Installation:
    With guix:
 #+begin_src shell
-  guix environment -l guix.scm
-  hall dist -x && autoreconf -vif && ./configure && make dist
   guix package -f guix.scm
 #+end_src
+
 ** Usage:
 
 #+begin_src scheme
@@ -23,6 +22,15 @@ guile-monads is a monads library for guile scheme.
 	  (return (list i j)))
 
   ; => ((1 2) (1 4) (1 6) (2 2) (2 4) (2 6) (3 2) (3 4) (3 6))
+#+end_src
+
+#+begin_src scheme
+  (use-modules (monads))
+
+  (reify m-seq (list (reflect-seq '(1 2 3))
+                     (reflect-seq '(2 4 6))))
+
+  ; => ((1 2) (1 4) (1 6) (2 2) (2 4) (2 6) (3 2) (3 4) (3 6))  
 #+end_src
 
 Implemented monads are: Identity (m-id), Sequence/List (m-seq), State (m-state),

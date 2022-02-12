@@ -21,7 +21,7 @@
                (url "https://github.com/silasfox/guile-monads")
                (commit "0.1.1.2")))
         (file-name "guile-monads-0.1.1.1-checkout")
-        (sha256 (base32 "17y0hr4xd42lv2f3zdv0f08g436drgc7sfws7ppbfyly8z90ycl7"))))
+        (sha256 (base32 "0vqmxkl825nm1ha5gipmqs70gx9r1vrkki485ssfhl20zf8a9zh3"))))
     (build-system gnu-build-system)
     (arguments `())
     (native-inputs
