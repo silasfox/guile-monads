@@ -13,14 +13,14 @@
 
   (package
     (name "guile-monads")
-    (version "0.1.1")
+    (version "0.1.1.1")
     (source
       (origin
         (method git-fetch)
         (uri (git-reference
                (url "https://github.com/silasfox/guile-monads")
-               (commit "0.1.1")))
-        (file-name "guile-monads-0.1.1-checkout")
+               (commit "0.1.1.1")))
+        (file-name "guile-monads-0.1.1.1-checkout")
         (sha256 (base32 "03v71as64i42i39c58ww51sgfyw0xfl82hn8l24c4xqm1yf983rm"))))
     (build-system gnu-build-system)
     (arguments `())
