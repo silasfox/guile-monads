@@ -12,8 +12,8 @@
 
 (package
   (name "guile-monads")
-  (version "0.1")
-  (source "./guile-monads-0.1.tar.gz")
+  (version "0.1.1")
+  (source "./guile-monads-0.1.1.tar.gz")
   (build-system gnu-build-system)
   (arguments `())
   (native-inputs

@@ -1,6 +1,7 @@
 (define-module (monads)
   #:use-module (srfi srfi-1)
   #:use-module (srfi srfi-9)
+  #:use-module (ice-9 control)
   #:export (<monad> monad with-m
             m-seq bind-seq return-seq
             m-id
@@ -17,8 +18,18 @@
   (plus plus)
   (zero zero))
 
+(define (make-reflector monad)
+    (lambda (meaning)
+        (shift k ((binder monad) meaning k))))
+
+(define-syntax reify
+    (syntax-rules ()
+      ((reify monad exp) (reset ((returner monad) exp)))))
+
 (define m-id
   (monad (lambda (v f) (f v)) (lambda (v) v) #f #f))
+
+(define reflect-id (make-reflector m-id))
 
 (define bind-seq (lambda (v f) (fold-right append '() (map f v))))
 (define return-seq (lambda (v) (list v)))
@@ -28,6 +39,8 @@
          return-seq
          #f
          #f))
+
+(define reflect-seq (make-reflector m-seq))
 
 (define bind-maybe (lambda (v f)
                      (cond ((eq? (car v) 'just) (f (cadr v)))
@@ -40,6 +53,8 @@
          #f
          #f))
 
+(define reflect-maybe (make-reflector m-maybe))
+
 (define bind-cont (lambda (v f)
                     (lambda (k)
                       (v (lambda (w) ((f w) k))))))
@@ -51,6 +66,8 @@
          return-cont
          #f
          #f))
+
+(define reflect-cont (make-reflector m-cont))
 
 (define bind-state (lambda (v f)
                      (lambda (s) (let ((vs (v s)))
@@ -65,12 +82,12 @@
          #f
          #f))
 
-(define (get-state s) `(,s . ,s))
-(define (put-state new-s) (lambda (s) `(_ . ,new-s)))
+(define reflect-state (make-reflector m-state))
 
-(define (init-stack) (put-state '()))
-(define (pop-stack s) s)
-(define (push-stack item) (lambda (s) `(_ . ,(cons item s))))
+(define (get-state s) `(,s . ,s))
+(define (get*) (reflect-state get-state))
+(define (put-state new-s) (lambda (s) `(_ . ,new-s)))
+(define (put* new-s) (reflect-state (put-state new-s)))
 
 (define bind-writer (lambda (v f)
                       (let ((mb (f (car v))))
@@ -83,7 +100,10 @@
          #f
          #f))
 
+(define reflect-writer (make-reflector m-writer))
+
 (define (tell-writer to-write) `(_ . (,to-write)))
+(define (tell* to-write) (reflect-writer (tell-writer to-write)))
 
 (define-syntax with-m
   (syntax-rules (<- return)
